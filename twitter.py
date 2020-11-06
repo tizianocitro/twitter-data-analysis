@@ -34,7 +34,7 @@ def obtainTweet(date_since, date_until):
         csvFileWithDuplicate[team] = open("CSVWithDuplicate/" + team + ".csv", "a", encoding="UTF-8")
         csvFileWritersWithDuplicate[team] = csv.writer(csvFileWithDuplicate[team])
 
-    # Obtain tweets for each teams
+    # Obtain tweets for each team
     for team in teams:
         print("I'm going to search tweets for " + team)
 
