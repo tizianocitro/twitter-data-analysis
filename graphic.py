@@ -9,7 +9,7 @@ def create_graph(dictionary, columns):
     df = df.set_index(columns[0]).rename_axis(None)
 
     # Sorting values
-    df = df.sort_values(columns[1], ascending=False)
+    df = df.sort_values(columns[1], ascending=True)
 
     df.plot.barh(figsize=(18, 8))
     plt.show()
