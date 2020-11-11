@@ -10,11 +10,13 @@ catch = False
 if catch:
     twitter.obtain_tweets(date_since, date_until)
 
+# Get and show total tweets statistics
 print("\nNumber of total tweets:")
 total_tweets_counts = twitter.count_total_tweets(twitter.get_teams())
 
 graphic.create_graph(total_tweets_counts, ["Team", "Count"])
 
+# Get and show unique users' tweets statistics
 print("\nNumber of tweets created by unique users:")
 total_tweets_per_unique_user_counts = twitter.count_tweets_per_unique_user(twitter.get_teams())
 

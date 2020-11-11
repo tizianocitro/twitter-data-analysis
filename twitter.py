@@ -1,6 +1,6 @@
-import collections
 import tweepy
 import csv
+import collections
 import pandas as pd
 
 # Set credentials
@@ -10,7 +10,7 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
                "ACCESS_TOKEN_SECRET": "JBcFXfyAeYVJoUimhafwnWWRMZVvp2taaSFsCD3nBNZ5z"}
 
 # Set teams
-#teams = ["#RealMadrid"]
+# teams = ["#RealMadrid"]
 teams = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
 def create_connection():
@@ -44,7 +44,7 @@ def obtain_tweets(date_since, date_until):
 
         # search_word = team + " -filter:retweets"
 
-        #Obtain tweets
+        # Obtain tweets
         tweets = tweepy.Cursor(api.search,
                                q=team,
                                lang="en",
@@ -61,7 +61,7 @@ def obtain_tweets(date_since, date_until):
     for team in teams:
         df = pd.read_csv("CSVWithDuplicate/" + team + ".csv", names=["screen_name", "name", "text", "retweet_count", "location"])
 
-        # remove duplicates
+        # Remove duplicated user
         df.drop_duplicates(subset=["screen_name", "name"], inplace=True)
 
         df.to_csv("CSVWithoutDuplicate/" + team + ".csv", index=False)
@@ -70,6 +70,7 @@ def obtain_tweets(date_since, date_until):
 def count_total_tweets(teams):
     total_tweets_counts = {}
 
+    # Count
     for team in teams:
         with open("CSVWithDuplicate/" + team + ".csv") as csv_file:
             csv_file_reader = csv.reader(csv_file)
@@ -82,6 +83,7 @@ def count_total_tweets(teams):
 def count_tweets_per_unique_user(teams):
     total_tweets_per_unique_user_counts = {}
 
+    # Count
     for team in teams:
         with open("CSVWithoutDuplicate/" + team + ".csv") as csv_file:
             csv_file_reader = csv.reader(csv_file)
@@ -93,8 +95,8 @@ def count_tweets_per_unique_user(teams):
 # Obtain the number of tweets per user
 def tweet_per_user(team):
     # Open CSV file with duplicate and get the list of tweet in a list of objects
-    with open("CSVWithoutDuplicate/#" + team + ".csv") as csv_file:
-        csv_file_reader = csv.reader(csv_file)
+    # with open("CSVWithoutDuplicate/#" + team + ".csv") as csv_file:
+        # csv_file_reader = csv.reader(csv_file)
         # next(csv_file_reader) to get a new line
 
     tweet_data_list = ()
@@ -110,6 +112,8 @@ def tweet_per_user(team):
 
 def sort(dictionary):
     sorted_tuples = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
+
+    # Get them in form of dictionary
     sorted_dictionary = collections.OrderedDict(sorted_tuples)
 
     return sorted_dictionary
