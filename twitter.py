@@ -10,8 +10,8 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
                "ACCESS_TOKEN_SECRET": "JBcFXfyAeYVJoUimhafwnWWRMZVvp2taaSFsCD3nBNZ5z"}
 
 # Set teams
-teams = ["#Barcelona"]
-# teams = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
+# teams = ["#RealMadrid"]
+teams = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
 
 def create_connection():
@@ -23,7 +23,7 @@ def create_connection():
     return api
 
 
-# Obtain tweets from twittter nad save them in two CSV files:
+# Obtain tweets from twitter nad save them in two CSV files:
 # The first file is for all tweets
 # The second file is for tweets from different users, so any user will be counted one single time
 def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate_path):
@@ -37,6 +37,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
     csv_file_with_duplicate = {}
     csv_file_writers_with_duplicate = {}
     for team in teams:
+        # csv_file_with_duplicate[team] = open(with_duplicate_path + team + ".csv", "w", encoding="UTF-8")
         csv_file_with_duplicate[team] = open(with_duplicate_path + team + ".csv", "a", encoding="UTF-8")
         csv_file_writers_with_duplicate[team] = csv.writer(csv_file_with_duplicate[team])
 
@@ -58,12 +59,12 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
             tweet_user = api.get_user(tweet.user.screen_name)
 
             csv_file_writers_with_duplicate[team].writerow(
-                [tweet.user.screen_name, tweet_user.name, tweet.text, tweet.retweet_count, tweet.user.location])
+                [tweet.user.screen_name, tweet_user.name, tweet.user.location, "2020-11-12"])
 
     # Save tweets that are not from the same user in order to get the different users which have published
     for team in teams:
         df = pd.read_csv(with_duplicate_path + team + ".csv",
-                         names=["screen_name", "name", "text", "retweet_count", "location"])
+                         names=["screen_name", "name", "location", "created"])
 
         # Remove duplicated user
         df.drop_duplicates(subset=["screen_name", "name"], inplace=True)
@@ -83,6 +84,7 @@ def count_total_tweets(teams, path):
             total_tweets_counts.setdefault(team, total_tweets_count)
 
     return sort(total_tweets_counts)
+
 
 # Obtain the number of total tweets for the given team
 def count_total_tweets_per_team(team, path):
@@ -121,7 +123,8 @@ def count_tweet_per_user(teams, total_path, unique_user_path):
     tweet_per_user_count = {}
 
     for team in teams:
-        tweet_per_user_per_team = count_total_tweets_per_team(team, total_path) / count_tweets_per_unique_user_per_team(team, unique_user_path)
+        tweet_per_user_per_team = count_total_tweets_per_team(team, total_path) / count_tweets_per_unique_user_per_team(
+            team, unique_user_path)
         tweet_per_user_count.setdefault(team, tweet_per_user_per_team)
 
     return sort(tweet_per_user_count)

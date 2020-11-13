@@ -2,21 +2,30 @@ import twitter
 import graphic
 
 # Set the time interval
-date_since = "2020-11-04"
-date_until = "2020-11-05"
+date_since = "2020-11-12"
+date_until = "2020-11-13"
 
 # Set source folders
 csv_with_duplicate = "CSVWithDuplicate/"
 csv_without_duplicate = "CSVWithoutDuplicate/"
 
-# Obtain tweets for each team
-catch_no_event = True
-# catch_no_event = False
+# Obtain tweets for each team in case of no event
+# catch_no_event = True
+catch_no_event = False
 if catch_no_event:
     twitter.obtain_tweets(date_since,
                           date_until,
                           csv_with_duplicate + "NoEvent/",
-                          csv_with_duplicate + "NoEvent/")
+                          csv_without_duplicate + "NoEvent/")
+
+# Obtain tweets for each team in case of event
+# catch_event = True
+catch_event = False
+if catch_event:
+    twitter.obtain_tweets(date_since,
+                          date_until,
+                          csv_with_duplicate + "Event/",
+                          csv_without_duplicate + "Event/")
 
 # Get and show total tweets statistics
 print("\nNumber of total tweets:")
