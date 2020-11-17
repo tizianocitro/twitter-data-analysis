@@ -10,8 +10,8 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
                "ACCESS_TOKEN_SECRET": "JBcFXfyAeYVJoUimhafwnWWRMZVvp2taaSFsCD3nBNZ5z"}
 
 # Set teams
-# teams = ["#RealMadrid"]
-teams = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
+# teams_to_catch = ["#RealMadrid"]
+teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
 
 def create_connection():
@@ -130,25 +130,6 @@ def count_tweet_per_user(teams, total_path, unique_user_path):
     return sort(tweet_per_user_count)
 
 
-# Obtain the number of tweets per user
-def tweet_per_user(team):
-    # Open CSV file with duplicate and get the list of tweet in a list of objects
-    # with open("CSVWithoutDuplicate/#" + team + ".csv") as csv_file:
-    # csv_file_reader = csv.reader(csv_file)
-    # next(csv_file_reader) to get a new line
-
-    tweet_data_list = ()
-    tweet_dictionary = {}
-    for tweet_data in tweet_data_list:
-        # Check if the usern<me is in the list of keys of the dictionary
-        if tweet_data.screen_name not in tweet_dictionary:
-            nothing = "if"
-            # Add tweet_data.screen_name to tweet_dictionary with count = 1
-        else:
-            nothing = "else"
-            # Increment count of tweet_data.screen_name
-
-
 def sort(dictionary):
     sorted_tuples = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
 
@@ -163,4 +144,4 @@ def get_credentials():
 
 
 def get_teams():
-    return teams
+    return teams_to_catch
