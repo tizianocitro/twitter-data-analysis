@@ -50,7 +50,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
         # Obtain tweets
         tweets = tweepy.Cursor(api.search,
                                q=team,
-                               lang="en",
+                               # lang="en",
                                since=date_since,
                                until=date_until).items()
 
@@ -59,7 +59,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
             tweet_user = api.get_user(tweet.user.screen_name)
 
             csv_file_writers_with_duplicate[team].writerow(
-                [tweet.user.screen_name, tweet_user.name, tweet.user.location, "2020-11-12"])
+                [tweet.user.screen_name, tweet_user.name, tweet.user.location, tweet.created_at])
 
     # Save tweets that are not from the same user in order to get the different users which have published
     for team in teams:

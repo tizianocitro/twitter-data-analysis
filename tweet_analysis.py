@@ -3,7 +3,7 @@ import graphic
 import result
 
 # Set the time interval
-date_since = "2020-11-16"
+date_since = "2020-11-18"
 date_until = "2020-11-13"
 
 # Set source folders
@@ -12,7 +12,8 @@ csv_without_duplicate = "CSVWithoutDuplicate/"
 csv_result = "Result/"
 
 # Set variable date
-date = "2020-11-16/"
+date = "2020-11-18/"
+print("\nThe date is " + date)
 
 ##### No Event #####
 no_event_folder = "NoEvent/"
@@ -77,5 +78,5 @@ catch_event = False
 if catch_event:
     twitter.obtain_tweets(date_since,
                           date_until,
-                          csv_with_duplicate + "Event/2020-11-16/",
-                          csv_without_duplicate + "Event/2020-11-16/")
+                          csv_with_duplicate + "Event/2020-11-18/",
+                          csv_without_duplicate + "Event/2020-11-18/")
