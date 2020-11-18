@@ -37,7 +37,6 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
     csv_file_with_duplicate = {}
     csv_file_writers_with_duplicate = {}
     for team in teams:
-        # csv_file_with_duplicate[team] = open(with_duplicate_path + team + ".csv", "w", encoding="UTF-8")
         csv_file_with_duplicate[team] = open(with_duplicate_path + team + ".csv", "a", encoding="UTF-8")
         csv_file_writers_with_duplicate[team] = csv.writer(csv_file_with_duplicate[team])
 

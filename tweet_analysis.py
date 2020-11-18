@@ -4,7 +4,7 @@ import result
 
 # Set the time interval
 date_since = "2020-11-18"
-date_until = "2020-11-13"
+date_until = "2020-11-19"
 
 # Set source folders
 csv_with_duplicate = "CSVWithDuplicate/"
