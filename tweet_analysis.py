@@ -3,8 +3,8 @@ import graphic
 import result
 
 # Set the time interval
-date_since = "2020-11-18"
-date_until = "2020-11-19"
+date_since = "2020-11-20"
+date_until = "2020-11-20"
 
 # Set source folders
 csv_with_duplicate = "CSVWithDuplicate/"
@@ -12,15 +12,15 @@ csv_without_duplicate = "CSVWithoutDuplicate/"
 csv_result = "Result/"
 
 # Set variable date
-date = "2020-11-18/"
-print("\nThe date is " + date)
+date = "2020-11-13/"
+print("The date is " + str(date)[:10] + "\n")
 
 ##### No Event #####
 no_event_folder = "NoEvent/"
 
 # Obtain tweets for each team in case of no event
-# catch_no_event = True
-catch_no_event = False
+catch_no_event = True
+# catch_no_event = False
 if catch_no_event:
     twitter.obtain_tweets(date_since,
                           date_until,
