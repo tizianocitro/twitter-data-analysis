@@ -12,15 +12,15 @@ csv_without_duplicate = "CSVWithoutDuplicate/"
 csv_result = "Result/"
 
 # Set variable date
-date = "2020-11-13/"
+date = "2020-11-15/"
 print("The date is " + str(date)[:10] + "\n")
 
 ##### No Event #####
 no_event_folder = "NoEvent/"
 
 # Obtain tweets for each team in case of no event
-catch_no_event = True
-# catch_no_event = False
+# catch_no_event = True
+catch_no_event = False
 if catch_no_event:
     twitter.obtain_tweets(date_since,
                           date_until,
