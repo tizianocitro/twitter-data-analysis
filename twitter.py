@@ -10,8 +10,8 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
                "ACCESS_TOKEN_SECRET": "JBcFXfyAeYVJoUimhafwnWWRMZVvp2taaSFsCD3nBNZ5z"}
 
 # Set teams
-# teams_to_catch = ["#RealMadrid"]
-teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
+teams_to_catch = ["#Chelsea"]
+# teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
 
 def create_connection():
@@ -49,7 +49,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
         # Obtain tweets
         tweets = tweepy.Cursor(api.search,
                                q=team,
-                               # lang="en",
+                               lang="en",
                                since=date_since,
                                until=date_until).items()
 
@@ -58,7 +58,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
             tweet_user = api.get_user(tweet.user.screen_name)
 
             csv_file_writers_with_duplicate[team].writerow(
-                [tweet.user.screen_name, tweet_user.name, tweet.user.location, str(tweet.created_at)[:10]])
+                [tweet.user.screen_name, tweet_user.name, tweet.user.location, "2020-11-21"]) # str(tweet.created_at)[:10]])
 
     # Save tweets that are not from the same user in order to get the different users which have published
     for team in teams:
@@ -83,15 +83,6 @@ def count_total_tweets(teams, path):
             total_tweets_counts.setdefault(team, total_tweets_count)
 
     return sort(total_tweets_counts)
-
-
-# Obtain the number of total tweets for the given team
-def count_total_tweets_per_team(team, path):
-    with open(path + team + ".csv") as csv_file:
-        csv_file_reader = csv.reader(csv_file)
-        total_tweets_per_team = len(list(csv_file_reader))
-
-    return total_tweets_per_team
 
 
 # Obtain the number of tweets per unique user for each teams
@@ -136,6 +127,46 @@ def sort(dictionary):
     sorted_dictionary = collections.OrderedDict(sorted_tuples)
 
     return sorted_dictionary
+
+
+# Get the number of all the tweets obtained during the analysis
+def get_total_stats(no_event_dates, event_dates):
+    stats = 0
+
+    csv_with_duplicate = "CSVWithDuplicate/"
+    csv_without_duplicate = "CSVWithoutDuplicate/"
+
+    no_event_folder = "NoEvent/"
+    event_folder = "Event/"
+
+    # Count all tweets for no_event analysis
+    stats += count_all_obtained_tweets(no_event_dates, get_teams(), csv_with_duplicate, no_event_folder)
+    stats += count_all_obtained_tweets(no_event_dates, get_teams(), csv_without_duplicate, no_event_folder)
+
+    # Count all tweets for event analysis
+    stats += count_all_obtained_tweets(event_dates, get_teams(), csv_with_duplicate, event_folder)
+    stats += count_all_obtained_tweets(event_dates, get_teams(), csv_without_duplicate, event_folder)
+
+    return stats
+
+
+def count_all_obtained_tweets(dates, teams, duplicate_folder, event_folder):
+    count = 0
+
+    for date in dates:
+        for team in teams:
+            count += count_total_tweets_per_team(team, duplicate_folder + event_folder + date)
+
+    return count
+
+
+# Obtain the number of total tweets for the given team
+def count_total_tweets_per_team(team, path):
+    with open(path + team + ".csv") as csv_file:
+        csv_file_reader = csv.reader(csv_file)
+        total_tweets_per_team = len(list(csv_file_reader))
+
+    return total_tweets_per_team
 
 
 def get_credentials():
