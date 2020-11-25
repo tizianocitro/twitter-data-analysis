@@ -10,8 +10,8 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
                "ACCESS_TOKEN_SECRET": "JBcFXfyAeYVJoUimhafwnWWRMZVvp2taaSFsCD3nBNZ5z"}
 
 # Set teams
-teams_to_catch = ["#Chelsea"]
-# teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
+# teams_to_catch = ["#RealMadrid"]
+teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
 
 def create_connection():
@@ -49,7 +49,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
         # Obtain tweets
         tweets = tweepy.Cursor(api.search,
                                q=team,
-                               lang="en",
+                               # lang="en",
                                since=date_since,
                                until=date_until).items()
 
@@ -58,7 +58,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
             tweet_user = api.get_user(tweet.user.screen_name)
 
             csv_file_writers_with_duplicate[team].writerow(
-                [tweet.user.screen_name, tweet_user.name, tweet.user.location, "2020-11-21"]) # str(tweet.created_at)[:10]])
+                [tweet.user.screen_name, tweet_user.name, tweet.user.location, str(tweet.created_at)[:10]]) # "2020-11-22"])
 
     # Save tweets that are not from the same user in order to get the different users which have published
     for team in teams:

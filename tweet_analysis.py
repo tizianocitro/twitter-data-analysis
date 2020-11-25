@@ -3,8 +3,8 @@ import graphic
 import result
 
 # Set the time interval
-date_since = "2020-11-19"
-date_until = "2020-11-21"
+date_since = "2020-11-21"
+date_until = "2020-11-22"
 
 # Set source folders
 csv_with_duplicate = "CSVWithDuplicate/"
@@ -12,7 +12,7 @@ csv_without_duplicate = "CSVWithoutDuplicate/"
 csv_result = "Result/"
 
 # Set variable date
-date = "2020-11-21/"
+date = "2020-11-22/"
 print("The date for no_event is " + str(date)[:10] + "\n")
 
 ##### No Event #####
