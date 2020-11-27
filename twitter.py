@@ -46,19 +46,19 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
 
         # search_word = team + " -filter:retweets"
 
-        # Obtain tweets
-        tweets = tweepy.Cursor(api.search,
-                               q=team,
-                               # lang="en",
-                               since=date_since,
-                               until=date_until).items()
-
-        # Save obtained tweets
-        for tweet in tweets:
-            tweet_user = api.get_user(tweet.user.screen_name)
-
-            csv_file_writers_with_duplicate[team].writerow(
-                [tweet.user.screen_name, tweet_user.name, tweet.user.location, str(tweet.created_at)[:10]])
+        # # Obtain tweets
+        # tweets = tweepy.Cursor(api.search,
+        #                        q=team,
+        #                        # lang="en",
+        #                        since=date_since,
+        #                        until=date_until).items()
+        #
+        # # Save obtained tweets
+        # for tweet in tweets:
+        #     tweet_user = api.get_user(tweet.user.screen_name)
+        #
+        #     csv_file_writers_with_duplicate[team].writerow(
+        #         [tweet.user.screen_name, tweet_user.name, tweet.user.location, str(tweet.created_at)[:10]])
 
     # Save tweets that are not from the same user in order to get the different users which have published
     for team in teams:
