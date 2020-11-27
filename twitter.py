@@ -13,7 +13,7 @@ credentials = {"CONSUMER_KEY": "7wUxEvUfDmfav3WbpKcU8O9NQ",
 # teams_to_catch = ["#RealMadrid"]
 teams_to_catch = ["#RealMadrid", "#Barcelona", "#ManchesterUnited", "#Chelsea", "#Juventus"]
 
-
+# Build a connection with Twitter
 def create_connection():
     # Establishing connection
     auth = tweepy.OAuthHandler(credentials["CONSUMER_KEY"], credentials["CONSUMER_SECRET"])
@@ -134,18 +134,15 @@ def get_total_stats(no_event_dates, event_dates):
     stats = 0
 
     csv_with_duplicate = "CSVWithDuplicate/"
-    csv_without_duplicate = "CSVWithoutDuplicate/"
 
     no_event_folder = "NoEvent/"
     event_folder = "Event/"
 
     # Count all tweets for no_event analysis
     stats += count_all_obtained_tweets(no_event_dates, get_teams(), csv_with_duplicate, no_event_folder)
-    stats += count_all_obtained_tweets(no_event_dates, get_teams(), csv_without_duplicate, no_event_folder)
 
     # Count all tweets for event analysis
     stats += count_all_obtained_tweets(event_dates, get_teams(), csv_with_duplicate, event_folder)
-    stats += count_all_obtained_tweets(event_dates, get_teams(), csv_without_duplicate, event_folder)
 
     return stats
 
@@ -155,7 +152,7 @@ def count_all_obtained_tweets(dates, teams, duplicate_folder, event_folder):
 
     for date in dates:
         for team in teams:
-            count += count_total_tweets_per_team(team, duplicate_folder + event_folder + date)
+            count += count_total_tweets_per_team(team, duplicate_folder + event_folder + date + "/")
 
     return count
 
