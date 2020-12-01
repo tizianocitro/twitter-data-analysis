@@ -17,7 +17,8 @@ no_event_dates = ["2020-11-10",
 event_dates = ["2020-11-20",
                "2020-11-21",
                "2020-11-22",
-               "2020-11-28"]
+               "2020-11-28",
+               "2020-11-29"]
 
 # Experiments number
 experiments = len(no_event_dates) + len(event_dates)
