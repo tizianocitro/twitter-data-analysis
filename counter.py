@@ -18,7 +18,10 @@ event_dates = ["2020-11-20",
                "2020-11-21",
                "2020-11-22",
                "2020-11-28",
-               "2020-11-29"]
+               "2020-11-29",
+               "2020-11-30"]
+
+print("Counter started")
 
 # Experiments number
 experiments = len(no_event_dates) + len(event_dates)
@@ -34,3 +37,5 @@ result.save_stats(experiments, total, average,
                  ["Experiments", "Total", "Average"],
                  "Result/Stats/",
                  "Stats")
+
+print("Counter terminated")

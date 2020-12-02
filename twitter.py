@@ -42,7 +42,7 @@ def obtain_tweets(date_since, date_until, with_duplicate_path, without_duplicate
 
     # Obtain tweets for each team
     for team in teams:
-        print("I'm going to search tweets for " + team)
+        print("I'm going to handle tweets for " + team)
 
         # search_word = team + " -filter:retweets"
 
