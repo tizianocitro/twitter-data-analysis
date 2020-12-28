@@ -3,8 +3,8 @@ import graphic
 import result
 
 # Set the time interval
-date_since = "2020-11-21"
-date_until = "2020-11-22"
+date_since = "yyyy-mm-dd"
+date_until = "yyyy-mm-dd"
 
 # Set source folders
 csv_with_duplicate = "CSVWithDuplicate/"
@@ -12,7 +12,7 @@ csv_without_duplicate = "CSVWithoutDuplicate/"
 csv_result = "Result/"
 
 # Set variable date
-date = "2020-11-30/"
+date = "yyyy-mm-dd/"
 print("The date is " + str(date)[:10])
 
 ##### No Event #####
@@ -36,7 +36,7 @@ if no_event:
     print("\nGet number of total tweets")
     total_tweets_counts = twitter.count_total_tweets(twitter.get_teams(), csv_with_duplicate + no_event_folder + date)
 
-    # graphic.create_graph(total_tweets_counts, ["Team", "Count"])
+    graphic.create_graph(total_tweets_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nSave results -> Total tweets")
@@ -50,7 +50,7 @@ if no_event:
     total_tweets_per_unique_user_counts = twitter.count_tweets_per_unique_user(twitter.get_teams(),
                                                                                csv_without_duplicate + no_event_folder + date)
 
-    # graphic.create_graph(total_tweets_per_unique_user_counts, ["Team", "Count"])
+    graphic.create_graph(total_tweets_per_unique_user_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nSave results -> Total tweets per unique user")
@@ -65,7 +65,7 @@ if no_event:
                                                                    csv_with_duplicate + no_event_folder + date,
                                                                    csv_without_duplicate + no_event_folder + date)
 
-    # graphic.create_graph(tweets_per_user_per_team_counts, ["Team", "Count"])
+    graphic.create_graph(tweets_per_user_per_team_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nSave results -> Tweets per user per team")
@@ -95,7 +95,7 @@ if event:
     print("\nEvent: Get number of total tweets")
     total_tweets_counts = twitter.count_total_tweets(twitter.get_teams(), csv_with_duplicate + event_folder + date)
 
-    # graphic.create_graph(total_tweets_counts, ["Team", "Count"])
+    graphic.create_graph(total_tweets_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nEvent: Save results -> Total tweets")
@@ -109,7 +109,7 @@ if event:
     total_tweets_per_unique_user_counts = twitter.count_tweets_per_unique_user(twitter.get_teams(),
                                                                                csv_without_duplicate + event_folder + date)
 
-    # graphic.create_graph(total_tweets_per_unique_user_counts, ["Team", "Count"])
+    graphic.create_graph(total_tweets_per_unique_user_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nEvent: Save results -> Total tweets per unique user")
@@ -124,7 +124,7 @@ if event:
                                                                    csv_with_duplicate + event_folder + date,
                                                                    csv_without_duplicate + event_folder + date)
 
-    # graphic.create_graph(tweets_per_user_per_team_counts, ["Team", "Count"])
+    graphic.create_graph(tweets_per_user_per_team_counts, ["Team", "Count"])
 
     # Save results in CSV file
     print("\nEvent: Save results -> Tweets per user per team")
